@@ -1,0 +1,393 @@
+
+" vimrc-noplugin
+" Author: Felix Yuan
+" Email: yyscamper@163.com
+" Last Modified Date: Jul 5, 2015
+" Source: https://github.com/yyscamper/vimconfig
+"
+" Reference:
+" (1) http://amix.dk/vim/vimrc.html
+" (2) https://github.com/amix/vimrc
+" (3) https://github.com/wklken/k-vim
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle Setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+filetype off
+filetype plugin indent on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Quickly close the current window
+nnoremap <leader>q :q<CR>
+
+" Map F12 to toggle Paste mode
+set pastetoggle=<F12>
+
+" Disbale paste mode when leaving insert mode
+au InsertLeave * set nopaste
+
+" Map ; to : to quickly enter command line, this will save a million keystrokes
+nnoremap ; :
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc,*.swp,*.bak,*.class,*.svn,*.git
+
+" Make vim do normal (bash like) tab completion
+set wildmode=longest:list,full
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Search instantly, makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" Configure backspace so it acts as it should act
+"set backspace=eol,start,indent
+"set whichwrap+=<,>,h,l
+
+" Set how many lines will be kept visible when move cursor up and down
+set scrolloff=7
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs
+" Insert tabs on the start of a line according to shiftwidth
+" Press backspace once will remove 4 spaces
+set smarttab
+
+" 1 tab == 4 spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+" Auto indent, same with set autoindent
+set ai "Auto indent
+
+" Smart indent, same with set smartindent
+set si "Smart indent
+
+" Don't wrap lines
+set nowrap
+
+" Default show line number
+set number
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => File encoding
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Try following encoding in following defined order in auto mode
+set fileencodings=utf-8,gbk,utf-16,big5,latin1
+set fileencoding=utf-8
+
+" Set new file's encoding
+set encoding=utf-8
+set termencoding=
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Backup file to another location, currently disable this
+"set backup
+"set backext=.bak
+"set backupdir=/tmp/vimbackup/
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+" Create undo file
+if has('persistent_undo')
+  set undolevels=1000         " How many undos
+  set undoreload=10000        " number of lines to save for undo
+  set undofile                " So is persistent undo ...
+  set undodir=/tmp/vimundo/
+endif
+
+" Automatically reload the vim configure file if has modification
+"autocmd! bufwritepost _vimrc source % " windows
+autocmd! bufwritepost .vimrc source % " linux
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
+" Enable syntax highlighting
+syntax enable
+
+set background=dark
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Visual mode related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Useful mappings for managing tabs
+map <leader>tt :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tq :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>tp :tabp<cr>
+map <leader>tn :tabn<cr>
+
+" Quickly switch to the specified tab
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Quickly open a buffer for scripbble
+map <leader>bb :e ~/buffer<cr>
+
+" Specify the behavior when switching between buffers 
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+" useful mappings for managing windows
+map <leader>wh :wincmd h<cr>
+map <leader>wj :wincmd j<cr>
+map <leader>wk :wincmd k<cr>
+map <leader>wl :wincmd l<cr>
+map <leader>wq :wincmd q<cr>
+map <leader>ww :wincmd w<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Status line
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Select whole line
+map Y y$
+
+" Select block
+nnoremap <leader>v V`}
+
+" Press w!! to sudo & write a file
+cmap w!! w !sudo tee >/dev/null %
+
+" Press U for easier redo
+nnoremap U <C-r>
+
+" Remove highlight
+noremap <silent><leader>/ :nohls<CR>
+
+"Keep search pattern at the center of the screen."
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" Move a line of text
+nmap <leader>lj mz:m+<cr>`z
+nmap <leader>lk mz:m-2<cr>`z
+vmap <leader>lj :m'>+<cr>`<my`>mzgv`yo`z
+vmap <leader>lk :m'<-2<cr>`>my`<mzgv`yo`z
+
+" The opened content will still keep in screen after close vim
+" This doesn't work well in SSH console
+"set t_ti= t_te=
+
+" Delete trailing white space on save
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.c :call DeleteTrailingWS()
+autocmd BufWrite *.cpp :call DeleteTrailingWS()
+autocmd BufWrite *.js :call DeleteTrailingWS()
+autocmd BufWrite *.java :call DeleteTrailingWS()
+autocmd BufWrite *.xml :call DeleteTrailingWS()
+
+" Automatically add the file header for the new file
+autocmd BufNewFile *.sh,*.py,*.js exec ":call AutoSetFileHead()"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>~m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Format JSON by json.tool
+"nmap <C-J> :%!python -m json.tool<CR>:setfiletype json<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
+
+" automatically set the header of the new file
+function! AutoSetFileHead()
+    " .sh
+    if &filetype == 'sh'
+        call setline(1, "\#!/bin/bash")
+    endif
+
+    " python
+    if &filetype == 'python'
+        call setline(1, "\#!/usr/bin/env python")
+        " call append(1, "\# encoding: utf-8")
+    endif
+
+	" javascript (node.js)
+	if &filetype == 'javascript'
+		call setline(1, "\#!/usr/bin/env node")
+	endif
+
+    normal G
+    normal o
+    normal o
+endfunc
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
