@@ -99,6 +99,8 @@ alias drma="sudo docker rm `sudo docker ps -a -q`"
 alias drun="sudo docker run"
 alias dexec="sudo docker exec -i -t"
 alias dbuild="sudo docker build"
+alias dstop="sudo docker stop"
+alias dstart="sudo docker start"
 # RackHD repo aliases
 alias grn="grep -rn"
 alias ccore="cd ~/src/on-core"
