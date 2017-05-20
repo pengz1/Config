@@ -1,0 +1,13 @@
+[user]
+	name = krein peng
+	email = zuiliang.peng@emc.com
+[alias]
+	co = checkout
+	br = branch
+	amend = commit --amend
+[credential]
+	helper = store
+[core]
+	editor = vim
+[commit]
+	template = /home/onrack/.gitmessage.txt

@@ -20,3 +20,7 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+if [ -d "$HOME/src/npm/bin" ] ; then
+    PATH="$HOME/src/npm/bin:$PATH"
+fi

@@ -91,32 +91,59 @@ alias l='ls -CF'
 alias rmf='sudo rm -r'
 alias cpf="sudo cp -r"
 # Docker operation alias
-alias drm="sudo docker rm"
-alias dps="sudo docker ps"
-alias dima="sudo docker images"
-alias drmi="sudo docker rmi"
-alias drma="sudo docker rm `sudo docker ps -a -q`"
-alias drun="sudo docker run"
-alias dexec="sudo docker exec -i -t"
-alias dbuild="sudo docker build"
-alias dstop="sudo docker stop"
-alias dstart="sudo docker start"
-# RackHD repo aliases
+ alias drm="sudo docker rm"
+ alias dps="sudo docker ps"
+ alias dima="sudo docker images"
+ alias drmi="sudo docker rmi"
+ alias drun="sudo docker run"
+ alias dexec="sudo docker exec -i -t"
+ alias dbuild="sudo docker build"
+ alias dstop="sudo docker stop"
+ alias dstart="sudo docker start"
 alias grn="grep -rn"
+# Git commands
+alias gcommit="git commit"
+alias gco="git checkout"
+alias gstatus="git status"
+alias glog="git log"
+alias gpush="git push origin"
+alias gpushf="git push -f origin"
+alias gadd="git add"
+alias grm="git rm"
+alias gamend="git commit --amend"
+alias greset="git reset"
+alias gsreset="git reset --soft" #reset soft
+alias ghreset="git reset --hard" #reset hard
+alias gcheckout="git checkout" #checkout
+alias ggiveup="git checkout --" #git give up
+alias gmbr="git branch -m" #git modify branch
+alias gdbr="git branch -d" #git delete branch
+# RackHD repo aliases
+alias csample="cd ~/_src/samples"
 alias ccore="cd ~/src/on-core"
 alias vcore="cd ~/src/on-core;vim index.js"
 alias chttp="cd ~/src/on-http"
 alias vhttp="cd ~/src/on-http;vim index.js"
+alias shttp="cd ~/src/on-http;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-http.log &"
 alias ctask="cd ~/src/on-tasks"
 alias vtask="cd ~/src/on-tasks;vim index.js"
 alias cgraph="cd ~/src/on-taskgraph"
 alias vgraph="cd ~/src/on-taskgraph;vim index.js"
+alias sgraph="cd ~/src/on-taskgraph;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-graph.log &"
 alias cimage="cd ~/_src/on-imagebuilder"
 alias vimage="cd ~/_src/on-imagebuilder;vim index.js"
 alias cdoc="cd ~/_src/docs/docs"
 alias vdoc="cd ~/_src/docs/docs;vim README.md"
 alias csku="cd ~/_src/on-skupack"
 alias vsku="cd ~/_src/on-skupack;vim README.md"
+alias ctftp="cd ~/src/on-tftp"
+alias stftp="cd ~/src/on-tftp;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-tftp.log &"
+alias csyslog="cd ~/src/on-syslog"
+alias ssyslog="cd ~/src/on-syslog;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-sys.log &"
+alias cdhcp="cd ~/src/on-dhcp-proxy"
+alias sdhcp="cd ~/src/on-dhcp-proxy;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-dhcp.log &"
+alias srackhd="stftp;ssyslog;shttp;sgraph;sdhcp"
+alias bk2="cd ../../"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -146,3 +173,5 @@ PERL5LIB="/home/onrack/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LI
 PERL_LOCAL_LIB_ROOT="/home/onrack/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/onrack/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/onrack/perl5"; export PERL_MM_OPT;
+
+export TERM='xterm-256color'
