@@ -10,6 +10,14 @@
 "  https://github.com/wklken/k-vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => spell check 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+setlocal spell spelllang=en
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => git conventions 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd Filetype gitcommit setlocal spell textwidth=72
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => File encoding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Try following encoding in following defined order in auto mode
@@ -35,7 +43,7 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 set noswapfile
-
+set display=lastline
 " Create undo file
 if has('persistent_undo')
   set undolevels=1000         " How many undos
@@ -54,11 +62,14 @@ autocmd! bufwritepost .vimrc source % " linux
 syntax on
 " Enable syntax highlighting
 syntax enable
-
+set guifont=Courier_new:h11:b:cDEFAULT
 set background=dark
 
 colorscheme solarized
-
+"Open vim configuration file
+nnoremap <leader>vo :vsp ~/.vimrc<CR>
+"source vim configuration file
+nnoremap <leader>vs :source ~/.vimrc<CR>
 " Configure for solarized
 let g:solarized_termtrans=0
 let g:solarized_degrade=0
@@ -71,7 +82,7 @@ set t_Co=256
 function! AutoSetFileLineLimit()
     " python
     if &filetype == 'python'
-        setlocal textwidth=128
+        setlocal textwidth=100
         setlocal colorcolumn=+1
         let &colorcolumn="100,".join(range(129, 999), ",")
         return
@@ -182,6 +193,7 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 " General plugins
 "Plugin 'Lokaltog/powerline'
 "Plugin 'ashwin/vim-powerline'
+Plugin 'ervandew/supertab'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -200,6 +212,7 @@ Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'jasoncodes/ctrlp-modified.vim'
+Plugin 'lfilho/cosco.vim'
 
 Plugin 'tpope/vim-repeat'
 "Plugin 'Shougo/neocomplete.vim'
@@ -244,6 +257,32 @@ Plugin 'elzr/vim-json'
 " Plugin 'vim-scripts/genutils'
 Plugin 'powerman/vim-plugin-AnsiEsc'
 
+" Grammar
+Plugin 'rhysd/vim-grammarous'
+
+" Add support for reactjs
+Plugin 'mxw/vim-jsx'
+Plugin 'justinj/vim-react-snippets'
+
+" Add support for vuejs
+Plugin 'posva/vim-vue'
+
+" HTML/CSS support
+Plugin 'mattn/emmet-vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'groenewege/vim-less'
+Plugin 'Raimondi/delimitMate'
+
+" Typescript support
+Plugin 'Shougo/vimproc.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'Quramy/vim-js-pretty-template'
+
+" Commenter
+Plugin 'scrooloose/nerdcommenter'
+let g:NERDSpaceDelims=1
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -282,6 +321,8 @@ au InsertLeave * set nopaste
 
 " Map ; to : to quickly enter command line, this will save a million keystrokes
 nnoremap ; :
+" urce vim configuration file;
+
 
 " Map space to page down
 nnoremap <space> <C-D>
@@ -305,7 +346,7 @@ nnoremap 'b <C-O>
 
 " move to previous cursor position
 nnoremap 'f <C-I>
-
+let g:languagetool_jar='$HOME/languagetool/languagetool-standalone/target/LanguageTool-3.3-SNAPSHOT/LanguageTool-3.3-SNAPSHOT/languagetool-commandline.jar'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -368,7 +409,7 @@ set smarttab
 " 1 tab == 4 spaces
 set tabstop=4
 set softtabstop=4
-set shiftwidth=4
+set shiftwidth=2
 
 " Auto indent, same with set autoindent
 set ai "Auto indent
@@ -466,7 +507,7 @@ map <silent> <F8> :NextColorScheme<CR>
 map <silent> <C-F8> :PrevColorScheme<CR>
 let g:colorscheme_switcher_exclude = ['default', 'blue', 'evening', 'morning',
             \ 'pablo', 'darkblue', 'zellner', 'torte', 'peachpuff']
-
+colorscheme solarized
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin: vim-multiple-cursors
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -793,8 +834,10 @@ nmap <F2> :TagbarToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin: Syntastic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_jshint_args = "-c ~/.jshintrc"
+"let g:syntastic_javascript_jshint_args = "-c ~/.jshintrc"
+let g:syntastic_javascript_jshint_args = "~/.jshintrc"
 
 let g:syntastic_json_checkers = ['jsonlint']
 
@@ -947,6 +990,13 @@ let g:hound_repos="*"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufEnter *.log AnsiEsc
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin: cosco 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
+imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
+nmap ; :call AutoCommaOrSemiColon()<CR>
+" let g:auto_comma_or_semicolon = 1;
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

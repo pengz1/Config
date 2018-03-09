@@ -118,10 +118,15 @@ alias gcheckout="git checkout" #checkout
 alias ggiveup="git checkout --" #git give up
 alias gmbr="git branch -m" #git modify branch
 alias gdbr="git branch -d" #git delete branch
+alias gfetch="git fetch upstream master; git rebase upstream/master" #git delete branch
 # RackHD repo aliases
 alias csample="cd ~/_src/samples"
 alias ccore="cd ~/src/on-core"
 alias vcore="cd ~/src/on-core;vim index.js"
+alias cui="cd ~/_src/rackhd-ui-2.0"
+alias cweb="cd ~/_src/on-web-ui"
+alias vweb="cd ~/_src/on-web-ui;vim webpack.config.babel.js"
+alias vui="cd ~/_src/rackhd-ui-2.0/src/app;vim app.module.ts"
 alias chttp="cd ~/src/on-http"
 alias vhttp="cd ~/src/on-http;vim index.js"
 alias shttp="cd ~/src/on-http;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-http.log &"
@@ -142,8 +147,12 @@ alias csyslog="cd ~/src/on-syslog"
 alias ssyslog="cd ~/src/on-syslog;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-sys.log &"
 alias cdhcp="cd ~/src/on-dhcp-proxy"
 alias sdhcp="cd ~/src/on-dhcp-proxy;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-dhcp.log &"
-alias srackhd="stftp;ssyslog;shttp;sgraph;sdhcp"
+alias crackhd="cd ~/_src/rackhd-cli"
+alias ctool="cd ~/src/on-tools"
+alias bk1="cd .."
 alias bk2="cd ../../"
+alias bk3="cd ../../../"
+alias psg="ps aux | grep"
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

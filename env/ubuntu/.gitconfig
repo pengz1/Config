@@ -1,5 +1,5 @@
 [user]
-	name = krein peng
+	name = pengz1
 	email = zuiliang.peng@emc.com
 [alias]
 	co = checkout
@@ -11,3 +11,5 @@
 	editor = vim
 [commit]
 	template = /home/onrack/.gitmessage.txt
+[http]
+	sslverify = false
