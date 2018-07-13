@@ -123,10 +123,8 @@ alias gfetch="git fetch upstream master; git rebase upstream/master" #git delete
 alias csample="cd ~/_src/samples"
 alias ccore="cd ~/src/on-core"
 alias vcore="cd ~/src/on-core;vim index.js"
-alias cui="cd ~/_src/rackhd-ui-2.0"
-alias cweb="cd ~/_src/on-web-ui"
-alias vweb="cd ~/_src/on-web-ui;vim webpack.config.babel.js"
-alias vui="cd ~/_src/rackhd-ui-2.0/src/app;vim app.module.ts"
+alias cui="cd ~/_src/on-web-ui"
+alias vui="cd ~/_src/on-web-ui/src/app;vim app.module.ts"
 alias chttp="cd ~/src/on-http"
 alias vhttp="cd ~/src/on-http;vim index.js"
 alias shttp="cd ~/src/on-http;sudo node index.js 2>&1 > /home/onrack/tmp/log/on-http.log &"
@@ -184,3 +182,6 @@ PERL_MB_OPT="--install_base \"/home/onrack/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/onrack/perl5"; export PERL_MM_OPT;
 
 export TERM='xterm-256color'
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$HOME/go/bin:$GOPATH/bin:$GOROOT/bin
