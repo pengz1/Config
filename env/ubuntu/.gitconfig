@@ -13,3 +13,4 @@
 	template = /home/onrack/.gitmessage.txt
 [http]
 	sslverify = false
+	sslCAinfo = /etc/ssl/certs/ca-certificates.crt
