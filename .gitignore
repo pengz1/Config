@@ -2,6 +2,10 @@
 logs
 *.log
 
+# Vim packages
+vim/Vundle.vim
+vim/bundle
+
 # Runtime data
 pids
 *.pid
