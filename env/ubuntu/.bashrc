@@ -119,6 +119,8 @@ alias ggiveup="git checkout --" #git give up
 alias gmbr="git branch -m" #git modify branch
 alias gdbr="git branch -d" #git delete branch
 alias gfetch="git fetch upstream master; git rebase upstream/master" #git delete branch
+alias gamendall="git add .; git commit --amend" #git delete branch
+alias gcommitall="git add .; git commit" #git delete branch
 # RackHD repo aliases
 alias csample="cd ~/_src/samples"
 alias ccore="cd ~/src/on-core"
