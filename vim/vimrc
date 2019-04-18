@@ -303,6 +303,7 @@ filetype plugin indent on    " required
 " }}}
 
 au BufNewFile,BufRead Jenkinsfile setf groovy
+au BufNewFile,BufRead *.groovy setf groovy
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -425,7 +426,7 @@ set smarttab
 " 1 tab == 4 spaces
 set tabstop=4
 set softtabstop=4
-set shiftwidth=2
+set shiftwidth=4
 
 " Auto indent, same with set autoindent
 set ai "Auto indent
@@ -748,7 +749,7 @@ nmap <C-y> :Autoformat<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin: vim-indent-guide
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indent_guides_start_level = 2
+let g:indent_guides_start_level = 4
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
