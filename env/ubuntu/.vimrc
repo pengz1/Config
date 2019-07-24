@@ -79,6 +79,9 @@ let g:solarized_visibility="normal"
 
 set t_Co=256
 
+au BufNewFile,BufRead *.groovy setf groovy
+au BufNewFile,BufRead Jenkinsfile setf groovy
+
 function! AutoSetFileLineLimit()
     " python
     if &filetype == 'python'
@@ -90,6 +93,14 @@ function! AutoSetFileLineLimit()
 
     " javascript (node.js)
     if &filetype == 'javascript' || &filetype=='json'
+        setlocal textwidth=100
+        setlocal colorcolumn=+1
+        let &colorcolumn="100,".join(range(101,999), ",")
+        return
+    endif
+
+    " Jenkinsfile and groovy
+    if &filetype == 'groovy'
         setlocal textwidth=100
         setlocal colorcolumn=+1
         let &colorcolumn="100,".join(range(101,999), ",")
@@ -333,7 +344,7 @@ nnoremap <space> <C-D>
 " let &colorcolumn=join(range(101,999),",")
 " let &colorcolumn="100,".join(range(120,999),",")
 highlight ColorColumn ctermbg=grey guibg=#2c2d27
-autocmd BufEnter *.py,*.js,*.json,*.sh,*.c,*.h,*.java,.vimrc,vimrc,_vimrc
+autocmd BufEnter *.py,*.js,*.json,*.sh,*.c,*.h,*.java,.vimrc,vimrc,_vimrc,Jenkinsfile,*.groovy
             \ exec ":call AutoSetFileLineLimit()"
 
 
@@ -409,7 +420,7 @@ set smarttab
 " 1 tab == 4 spaces
 set tabstop=4
 set softtabstop=4
-set shiftwidth=2
+set shiftwidth=4
 
 " Auto indent, same with set autoindent
 set ai "Auto indent
@@ -1079,27 +1090,35 @@ function! AutoSetFileHead()
     normal o
 endfunc
 
-function! AutoSetFileLineLimit()
-    " python
-    if &filetype == 'python'
-        setlocal textwidth=128
-        setlocal colorcolumn=+1
-        let &colorcolumn="100,".join(range(129, 999), ",")
-        return
-    endif
+" function! AutoSetFileLineLimit()
+    " " python
+    " if &filetype == 'python'
+        " setlocal textwidth=128
+        " setlocal colorcolumn=+1
+        " let &colorcolumn="100,".join(range(129, 999), ",")
+        " return
+    " endif
 
-    " javascript (node.js)
-    if &filetype == 'javascript' || &filetype=='json'
-        setlocal textwidth=100
-        setlocal colorcolumn=+1
-        let &colorcolumn="100,".join(range(101,999), ",")
-        return
-    endif
+    " " javascript (node.js)
+    " if &filetype == 'javascript' || &filetype=='json'
+        " setlocal textwidth=100
+        " setlocal colorcolumn=+1
+        " let &colorcolumn="100,".join(range(101,999), ",")
+        " return
+    " endif
 
-    setlocal textwidth=100
-    setlocal colorcolumn=+1
-    let &colorcolumn=join(range(100,999),",")
-endfunc
+    " " javascript (node.js)
+    " if &filetype == 'groovy'
+        " setlocal textwidth=100
+        " setlocal colorcolumn=+1
+        " let &colorcolumn="100,".join(range(101,999), ",")
+        " return
+    " endif
+
+    " setlocal textwidth=100
+    " setlocal colorcolumn=+1
+    " let &colorcolumn=join(range(100,999),",")
+" endfunc
 
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -1121,3 +1140,4 @@ function! s:ZoomToggle() abort
         let t:zoomed = 1
     endif
 endfunction
+
